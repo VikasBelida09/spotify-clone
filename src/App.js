@@ -1,13 +1,9 @@
 import React from 'react';
 import './App.css';
-import Form from './Form';
-import Navbar from './Navbar';
 const App=()=> {
   return (
     <div >
-      <Navbar/>
-      <h1 className="text-center">Rent our Cars in this platform! </h1>
-      <h1 className="text-center"> Go Check it out ! </h1>
+      <h1>Hello React, Today i am going to make a To-Do App </h1>
     </div>
   );
 }
