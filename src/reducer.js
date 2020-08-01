@@ -1,5 +1,5 @@
 export const initialState = {
-  basket: [],
+  basket: JSON.parse(localStorage.getItem("basket")) || [],
   user: null,
 };
 export const getBasketTotal = (basket) =>
@@ -9,6 +9,10 @@ function reducer(state, action) {
   console.log(action);
   switch (action.type) {
     case "ADD_TO_BASKET":
+      localStorage.setItem(
+        "basket",
+        JSON.stringify([...state.basket, action.item])
+      );
       return {
         ...state,
         basket: [...state.basket, action.item],
@@ -23,12 +27,13 @@ function reducer(state, action) {
           `cant remove the prodcut (id:${action.id}) as its not in the basket`
         );
       }
+      localStorage.setItem("basket", JSON.stringify(newBasket));
       return { ...state, basket: newBasket };
-    case 'SET_USER':
+    case "SET_USER":
       return {
         ...state,
-        user:action.user
-      }  
+        user: action.user,
+      };
     default:
       return state;
   }

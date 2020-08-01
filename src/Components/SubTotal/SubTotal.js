@@ -24,7 +24,7 @@ const SubTotal = () => {
         thousandSeparator={true}
         prefix={"$"}
       />
-      <button>Proceed To checkout</button>
+      <button onClick={}>Proceed To checkout</button>
     </div>
   );
 };

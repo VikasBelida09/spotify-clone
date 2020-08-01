@@ -8,14 +8,10 @@ export default function PositionedSnackbar({ openFlag, data }) {
     vertical: "top",
     horizontal: "center",
   });
-
   const { vertical, horizontal, open } = state;
-
- 
   const handleClose = () => {
     setState({ ...state, open: false });
   };
-
   return (
     <div>
       <Snackbar

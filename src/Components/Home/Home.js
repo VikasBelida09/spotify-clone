@@ -11,7 +11,8 @@ const useStyles = makeStyles({
   root: {
     background: "	#5bc0de",
     color: "white",
-    fontWeight:'bolder'
+    fontWeight: "bolder",
+    marginTop: "50px",
   },
 });
 const Home = () => {
@@ -36,7 +37,7 @@ const Home = () => {
     <HomeContext.Provider value={{ triggerSnackBar }}>
       {stateData.opened && (
         <Snackbar
-          autoHideDuration={6000}
+          autoHideDuration={3000}
           anchorOrigin={{ vertical, horizontal }}
           open={stateData.opened}
           onClose={() => {
