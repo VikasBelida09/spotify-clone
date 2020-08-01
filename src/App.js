@@ -1,24 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import TaskList from "./Components/TaskList";
-import TaskListContextProvider from "./Context/taskListContext";
-import TaskForm from "./Components/TaskForm";
-import Header from "./Components/Header";
-import ShowProgress from "./Components/ShowProgress";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./Components/Navbar/Navbar";
+import Home from "./Components/Home/Home";
+import Checkout from "./Components/Checkout/Checkout";
+import Login from "./Components/Login/Login";
+import { useStateValue } from "./Context/StateProvider";
+import { auth } from "./firebase";
 const App = () => {
+  const [{ user }, dispatch] = useStateValue();
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch({
+          type: "SET_USER",
+          user: authUser,
+        });
+      } else {
+        dispatch({
+          type: "SET_USER",
+          user: null,
+        });
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return (
-    <TaskListContextProvider>
-      <div className="container">
-        <div className="app-wrapper">
-          <Header />
-          <div className="main">
-            <TaskForm />
-            <ShowProgress/>
-            <TaskList />
-          </div>
-        </div>
+    <Router>
+      <div className="app">
+        <Switch>
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/login">
+            <Login />
+            <h1>Login</h1>
+          </Route>
+          <Route path="/">
+            <Navbar />
+            <Home />
+          </Route>
+        </Switch>
       </div>
-    </TaskListContextProvider>
+    </Router>
   );
 };
 
