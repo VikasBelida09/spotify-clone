@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 import App from "./App";
-import { StateProvider } from "./Context/StateProvider";
-import reducer, { initialState } from "./reducer";
+import { DataLayer } from "./Context/DataLayer";
+import reducer, { initialState } from "./Context/reducer";
 
 ReactDOM.render(
   <React.StrictMode>
-    <StateProvider initialState={initialState} reducer={reducer}>
+    <DataLayer initialState={initialState} reducer={reducer}>
       <App />
-    </StateProvider>
+    </DataLayer>
   </React.StrictMode>,
   document.getElementById("root")
 );
